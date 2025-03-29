@@ -1,16 +1,26 @@
-pipeline:
-  agent: any
-  triggers:
-    - pollSCM: "H/2 * * * *"
-  stages:
-    - stage: "Checkout Code"
-      steps:
-        - sh: "git clone https://github.com/your-username/your-repo.git"
-    - stage: "Build"
-      steps:
-        - sh: "mvn clean package"
-    - stage: "Deploy to Tomcat"
-      steps:
-        - sh: "cp target/mywebapp.war /opt/tomcat9/webapps/"
-        - sh: "/opt/tomcat9/bin/shutdown.sh || true"
+pipeline {
+    agent any
 
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Azharhashmi111/mylocalrepo.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Building project...'
+                sh 'mvn clean install'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying to Tomcat...'
+                sh 'cp target/*.war /path/to/tomcat/webapps/'
+                sh 'sudo systemctl restart tomcat'
+            }
+        }
+    }
+}

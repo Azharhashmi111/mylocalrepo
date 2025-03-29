@@ -19,4 +19,15 @@
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 </web-app>
+rc/main/webapp/index.jsp
+vi pom.xml
+
+# Initialize Git if not done
+git init
+git remote add origin git@github.com:your-username/existing-repo.git
+
+# Commit and push
+git add .
+git commit -m "Added Java project structure with pom.xml"
+git push origin main
 

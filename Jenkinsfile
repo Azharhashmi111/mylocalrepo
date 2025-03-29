@@ -22,6 +22,4 @@ pipeline {
                 sh 'sudo systemctl restart tomcat'
             }
         }
-    }
-}
-
+    }}
